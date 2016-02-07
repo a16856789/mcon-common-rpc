@@ -7,7 +7,7 @@
 
 ```javascript
 // create the rpc instance
-var SimpleMsgRpc = require('simple-msg-rpc');
+var SimpleMsgRpc = require('mcon-common-rpc');
 var rpc = new SimpleMsgRpc({
     msgAdapter: {
         // send message(an serializable object)
