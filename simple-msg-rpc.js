@@ -195,6 +195,9 @@ SimpleMsgRpc.prototype._processResponse = function(pkg) {
 		return;
 	}
 
+	// clear the timeout
+	clearTimeout(req.timeoutId);
+
 	// call the request's callback
 	if (pkg.success) {
 		req.callback(null, pkg.response);
