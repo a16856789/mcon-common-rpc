@@ -21,6 +21,7 @@ function SimpleMsgRpc(conf) {
 	this.msgAdapter = conf.msgAdapter;
 	this.waittingRequests = {};
 	this.conf = conf;
+	this.rpcIdSeq = 0;
 }
 
 /**
@@ -29,7 +30,7 @@ function SimpleMsgRpc(conf) {
 SimpleMsgRpc.prototype.invoke = function(conf, callback) {
 	this._sendMsg({
 		type: SimpleMsgRpc.REQUEST,
-		rpcId: (new Date().getTime()).toString(),
+		rpcId: (new Date().getTime()).toString() + ('000000' + (this.rpcIdSeq++)).substr(-6, 6),
 		headers: conf.headers,
 		serviceId: conf.serviceId,
 		methodName: conf.methodName,
