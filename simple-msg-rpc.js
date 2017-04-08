@@ -166,6 +166,10 @@ SimpleMsgRpc.prototype._processRequest = function(pkg) {
 		if (headers.oneway) {
 			return;
 		}
+		// convert error
+		if (err instanceof Error) {
+			err = err.toString();
+		}
 		// send response
 		self._sendMsg({
 			type: SimpleMsgRpc.RESPONSE,
