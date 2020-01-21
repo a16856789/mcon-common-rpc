@@ -50,7 +50,7 @@ BeanInvoker.tryInvoke = function() {
     // get bean
     var name = methodName;
     var bean = this, method = null;
-    if (!bean || Object.keys(bean) == 0) {
+    if (!bean) {
         return callback('No Such Service "' + serviceId + '".');
     }
 
@@ -64,7 +64,16 @@ BeanInvoker.tryInvoke = function() {
     method = bean[name];
     if (typeof(method) === 'function') {
         var result = method.apply(bean, params);
-        return callback(null, result);
+        if (result instanceof Promise) {
+            return result
+                .then(function (realResult) {
+                    callback(null, realResult);
+                }).catch(function (error) {
+                    callback(error);
+                });
+        } else {
+            return callback(null, result);
+        }
     }
 
     // no such method error

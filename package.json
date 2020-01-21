@@ -1,6 +1,6 @@
 {
   "name": "mcon-common-rpc",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "rpc throght an oneway message tunnel",
   "main": "index.js",
   "scripts": {
